@@ -1,0 +1,17 @@
+- name: "My First Playbook"
+  hosts: webserver   # Hosts Group name 
+  become: yes        # For sudo
+
+
+  tasks:            # Tasks 
+  - name: "Install Apache"  # Task name
+    apt:                    # Module name
+      update_cache: yes     # update , name ,state it is the parameters
+      name: apache2         #  install apache 
+      state: present
+
+  - name: "start enable apache2 service"
+    systemd: 
+      name: apache2
+      state: started
+      enabled: yes
