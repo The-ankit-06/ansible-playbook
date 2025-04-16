@@ -1,0 +1,23 @@
+- name: "My First Playbook"
+  hosts: webserver
+  become: yes
+
+
+  tasks:
+  - name: "Install Apache"
+    apt:
+      update_cache: yes
+      name: apache2
+      state: present
+
+  - name: "Copy apache config file to managed node"
+    copy:
+      src: /tmp/apache2.conf        # path of the file on the controller node
+      dest: /etc/apache2/conf.d/    # Path whare the file will be copied on the managed node
+    notify: "Restart apache"
+
+  handlers:
+  - name: "Restart apache"
+    systemd: 
+      name: apache2
+      state: restarted
