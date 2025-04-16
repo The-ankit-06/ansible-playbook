@@ -1,0 +1,14 @@
+- name: "Second Playbook"
+  hosts: dbserver
+  become: yes
+  tasks:
+  - name: "Install mysql"
+    apt:
+      update_cache: yes
+      name: mysql-server
+      state: present
+  - name: "Start service of mysql"
+    systemd:               # module to manage 
+      name: mysql
+      state: started
+      enabled: yes
