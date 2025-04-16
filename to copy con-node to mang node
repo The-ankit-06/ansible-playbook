@@ -1,3 +1,7 @@
+# Before the execute 
+# If you don't have file or path which is copy then we need to create file or path
+
+
 - name: "My First Playbook"
   hosts: webserver
   become: yes
